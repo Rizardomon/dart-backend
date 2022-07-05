@@ -7,10 +7,10 @@ import '../models/noticia_model.dart';
 import '../services/generic_service.dart';
 import 'api.dart';
 
-class BlogApi extends Api {
+class NoticiasApi extends Api {
   final GenericService<NoticiaModel> _service;
 
-  BlogApi(this._service);
+  NoticiasApi(this._service);
 
   @override
   Handler getHandler({
@@ -19,28 +19,29 @@ class BlogApi extends Api {
   }) {
     Router router = Router();
 
-    router.get('/blog/noticias', (Request request) async {
+    router.get('/noticias', (Request request) async {
       List<NoticiaModel> noticias = await _service.findAll();
 
-      List<Map> noticiasMap = noticias.map((e) => e.toMap()).toList();
+      List<Map> noticiasMap = noticias.map((e) => e.toJson()).toList();
 
       return Response.ok(jsonEncode(noticiasMap));
     });
 
-    router.post('/blog/noticias', (Request request) async {
+    router.post('/noticias', (Request request) async {
       var body = await request.readAsString();
-      _service.save(NoticiaModel.fromJson(body));
-      return Response(201);
+      var result = await _service.save(
+        NoticiaModel.fromRequest(jsonDecode(body)),
+      );
+      return result ? Response(201) : Response(500);
     });
 
-    // /blog/noticias?id=123
-    router.put('/blog/noticias', (Request request) {
+    router.put('/noticias', (Request request) {
       String? id = request.url.queryParameters['id'];
       // _service.save(id);
       return Response.ok('Choveu hoje');
     });
 
-    router.delete('/blog/noticias', (Request request) {
+    router.delete('/noticias', (Request request) {
       String? id = request.url.queryParameters['id'];
       // _service.delete(id);
       return Response.ok('Choveu hoje');
