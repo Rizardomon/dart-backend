@@ -10,19 +10,13 @@ class UsuarioService implements GenericService<UsuarioModel> {
   UsuarioService(this._usuarioDAO);
 
   @override
-  Future<bool> delete(int id) async {
-    return _usuarioDAO.delete(id);
-  }
+  Future<bool> delete(int id) async => _usuarioDAO.delete(id);
 
   @override
-  Future<List<UsuarioModel>> findAll() async {
-    return _usuarioDAO.findAll();
-  }
+  Future<List<UsuarioModel>> findAll() async => _usuarioDAO.findAll();
 
   @override
-  Future<UsuarioModel?> findOne(int id) async {
-    return _usuarioDAO.findOne(id);
-  }
+  Future<UsuarioModel?> findOne(int id) async => _usuarioDAO.findOne(id);
 
   @override
   Future<bool> save(UsuarioModel value) async {
@@ -36,4 +30,7 @@ class UsuarioService implements GenericService<UsuarioModel> {
       return _usuarioDAO.create(value);
     }
   }
+
+  Future<UsuarioModel?> findByEmail(String email) async =>
+      _usuarioDAO.findByEmail(email);
 }

@@ -43,6 +43,15 @@ class UsuarioDAO implements DAO<UsuarioModel> {
         : UsuarioModel.fromMap(result.first.fields);
   }
 
+  Future<UsuarioModel?> findByEmail(String email) async {
+    var result =
+        await _execQuery('SELECT * FROM usuarios WHERE email = ?', [email]);
+
+    return result.affectedRows == 0
+        ? null
+        : UsuarioModel.fromEmail(result.first.fields);
+  }
+
   @override
   Future<bool> update(UsuarioModel value) async {
     var result = await _execQuery(
