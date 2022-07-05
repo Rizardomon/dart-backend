@@ -25,7 +25,7 @@ class UsuarioModel {
       map['email'] ?? '',
       map['is_ativo'] == 1,
       map['dt_criacao'],
-      map['dt_autalizacao'],
+      map['dt_atualizacao'],
     );
   }
 
