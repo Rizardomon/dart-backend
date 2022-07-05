@@ -2,9 +2,7 @@ import 'package:shelf/shelf.dart';
 
 import 'apis/blog_api.dart';
 import 'apis/login_api.dart';
-import 'dao/usuario_dao.dart';
 import 'infra/custom_server.dart';
-import 'infra/database/db_configuration.dart';
 import 'infra/dependency_injector/injects.dart';
 import 'infra/middleware_interception.dart';
 import 'utils/custom_env.dart';
@@ -12,9 +10,6 @@ import 'utils/custom_env.dart';
 void main() async {
   // CustomEnv.fromFile('.env');
   final _di = Injects.initialize();
-
-  UsuarioDAO _usuario = UsuarioDAO(_di.get<DBConfiguration>());
-  print(await _usuario.findOne(3));
 
   var cascadeHandler = Cascade()
       .add(_di.get<LoginApi>().getHandler())
