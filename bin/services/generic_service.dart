@@ -1,9 +1,9 @@
 abstract class GenericService<T> {
-  T findOne(int id);
+  Future<T?> findOne(int id);
 
-  List<T> findAll();
+  Future<List<T>> findAll();
 
-  bool save(T value);
+  Future<bool> save(T value);
 
-  bool delete(int id);
+  Future<bool> delete(int id);
 }

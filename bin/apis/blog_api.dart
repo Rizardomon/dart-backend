@@ -19,8 +19,8 @@ class BlogApi extends Api {
   }) {
     Router router = Router();
 
-    router.get('/blog/noticias', (Request request) {
-      List<NoticiaModel> noticias = _service.findAll();
+    router.get('/blog/noticias', (Request request) async {
+      List<NoticiaModel> noticias = await _service.findAll();
 
       List<Map> noticiasMap = noticias.map((e) => e.toMap()).toList();
 

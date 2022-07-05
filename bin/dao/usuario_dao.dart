@@ -9,7 +9,7 @@ class UsuarioDAO implements DAO<UsuarioModel> {
 
   @override
   Future<bool> create(UsuarioModel value) async {
-    var result = _execQuery(
+    var result = await _execQuery(
       'INSERT INTO usuarios (nome, email, password) VALUES (?, ?, ?)',
       [value.name, value.email, value.password],
     );
@@ -19,14 +19,14 @@ class UsuarioDAO implements DAO<UsuarioModel> {
 
   @override
   Future<bool> delete(int id) async {
-    var result = _execQuery('DELETE from usuarios where id = ?', [id]);
+    var result = await _execQuery('DELETE from usuarios where id = ?', [id]);
 
     return result.affectedRows > 0;
   }
 
   @override
   Future<List<UsuarioModel>> findAll() async {
-    var result = _execQuery('SELECT * FROM usuarios');
+    var result = await _execQuery('SELECT * FROM usuarios');
 
     return result
         .map((r) => UsuarioModel.fromMap(r.fields))
@@ -36,7 +36,7 @@ class UsuarioDAO implements DAO<UsuarioModel> {
 
   @override
   Future<UsuarioModel?> findOne(int id) async {
-    var result = _execQuery('SELECT * FROM usuarios WHERE id = ?', [id]);
+    var result = await _execQuery('SELECT * FROM usuarios WHERE id = ?', [id]);
 
     return result.affectedRows == 0
         ? null
@@ -45,7 +45,7 @@ class UsuarioDAO implements DAO<UsuarioModel> {
 
   @override
   Future<bool> update(UsuarioModel value) async {
-    var result = _execQuery(
+    var result = await _execQuery(
       'UPDATE usuarios set nome = ?, password = ? where id = ?',
       [value.name, value.password, value.id],
     );
