@@ -20,7 +20,8 @@ void main() async {
 
   var handler = Pipeline()
       .addMiddleware(logRequests())
-      .addMiddleware(MiddlewareInterception().middleware)
+      .addMiddleware(MiddlewareInterception.contentTypeJson)
+      .addMiddleware(MiddlewareInterception.cors)
       .addHandler(cascadeHandler);
 
   await CustomServer().initialize(
