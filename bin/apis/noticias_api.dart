@@ -19,6 +19,16 @@ class NoticiasApi extends Api {
   }) {
     Router router = Router();
 
+    router.get('/noticia', (Request req) async {
+      String? id = req.url.queryParameters['id'];
+      if (id == null) return Response(400);
+
+      var noticia = await _service.findOne(int.parse(id));
+      if (noticia == null) return Response(400);
+
+      return Response.ok(jsonEncode(noticia.toJson()));
+    });
+
     router.get('/noticias', (Request request) async {
       List<NoticiaModel> noticias = await _service.findAll();
 
