@@ -40,9 +40,7 @@ class NoticiaDAO implements DAO<NoticiaModel> {
     var result = await _dbConfiguration
         .execQuery('SELECT * FROM noticias WHERE id = ?', [id]);
 
-    return result.affectedRows == 0
-        ? null
-        : NoticiaModel.fromMap(result.first.fields);
+    return result.isEmpty ? null : NoticiaModel.fromMap(result.first.fields);
   }
 
   @override
