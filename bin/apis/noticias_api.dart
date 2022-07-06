@@ -35,10 +35,12 @@ class NoticiasApi extends Api {
       return result ? Response(201) : Response(500);
     });
 
-    router.put('/noticias', (Request request) {
-      String? id = request.url.queryParameters['id'];
-      // _service.save(id);
-      return Response.ok('Choveu hoje');
+    router.put('/noticias', (Request request) async {
+      var body = await request.readAsString();
+      var result = await _service.save(
+        NoticiaModel.fromRequest(jsonDecode(body)),
+      );
+      return result ? Response(200) : Response(500);
     });
 
     router.delete('/noticias', (Request req) async {
