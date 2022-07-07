@@ -10,6 +10,7 @@ environment:
 #   path: ^1.8.0
 
 dev_dependencies:
+  test: ^1.21.4
   lints: ^1.0.0
 dependencies:
   dart_jsonwebtoken: ^2.4.1
