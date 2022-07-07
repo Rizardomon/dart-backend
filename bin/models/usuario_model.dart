@@ -46,4 +46,29 @@ class UsuarioModel {
   String toString() {
     return 'UsuarioModel(id: $id, name: $name, email: $email, isActive: $isActive, dtCreated: $dtCreated, dtUpdated: $dtUpdated)';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is UsuarioModel &&
+        other.id == id &&
+        other.name == name &&
+        other.email == email &&
+        other.password == password &&
+        other.isActive == isActive &&
+        other.dtCreated == dtCreated &&
+        other.dtUpdated == dtUpdated;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        email.hashCode ^
+        password.hashCode ^
+        isActive.hashCode ^
+        dtCreated.hashCode ^
+        dtUpdated.hashCode;
+  }
 }
